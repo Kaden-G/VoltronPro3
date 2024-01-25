@@ -4,18 +4,58 @@
 <head>
     <title>Everette Enterprises Digital Asset Library</title>
     <style>
+        body {
+            background-color: yellow;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
         header {
             background-color: rgb(97, 97, 33);
             text-align: center;
             padding: 10px;
-            font-family: 'Brush Script MT', cursive;
-            font-size: 36px;
             color: black;
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 36pt;
+            margin-bottom: 10; /* Adjusted margin to remove extra space */
+        }
+        h2 {
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .form-container {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
             padding: 10px;
         }
 
@@ -36,28 +76,62 @@
             padding: 5px;
             margin-bottom: 10px;
         }
+
+        .assets {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .item {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            background-color: rgb(97, 97, 33);
+            padding: 10px;
+            color: black;
+        }
+
+        /* Updated styles for the bottom navigation */
+        .bottom-nav {
+            background-color: rgb(97, 97, 33);
+            color: black;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bottom-nav ul li {
+            margin: 0 10px;
+        }
+
+        .bottom-nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 </head>
 
 <body>
-
-    <header>
-        #menu ul{
-            list-style: none;
-            padding: 10;
-            }
-        <div id="menu"
-        <ul>
-            <li>ASK ME</li>
-        <h1>Everette Enterprises</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Library</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main>
         <h1>Everette Enterprises</h1>
@@ -98,13 +172,13 @@
             <h3>What we're about</h3>
 
             <div class="item">
-                <img src="C:\Users\codys\Voltron\AI-Image.png">
+                <img src="C:\Users\codys\AWS\VoltronTest\VoltronPro3\AI-Image.png">
                 <p>Description of image 1</p>
             </div>
 
             <div class="item">
-                <img src="image2.jpg">
-                <p>Description of image 2</p>
+                <img src="https://institute.careerguide.com/wp-content/uploads/2020/09/giphy-2.gif">
+                <p>what we're about</p>
             </div>
 
         </section>
@@ -114,6 +188,14 @@
         <p>&copy; 2023 Everette Enterprises</p>
     </footer>
 
+    <!-- New bottom navigation -->
+    <div class="bottom-nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Library</a></li>
+        </ul>
+    </div>
 </body>
 
 </html>
