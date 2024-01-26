@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Everette Enterprises Digital Asset Library</title>
     <style>
         body {
             background-color: yellow;
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            margin: 0;
+            padding: 0;
         }
 
-        header {
+        header, h1 {
+            background: url('C:/Users/codys/AWS/VoltronTest/VoltronPro3/website banner.jpg') center/cover no-repeat;
             background-color: rgb(97, 97, 33);
             text-align: center;
             padding: 10px;
@@ -20,16 +23,11 @@
         h1 {
             font-family: 'Brush Script MT', cursive;
             font-size: 36pt;
-            margin-bottom: 10; /* Adjusted margin to remove extra space */
-        }
-        h2 {
-            text-align: center;
-        }
-        h3 {
-            text-align: center;
+            padding: 20px 650px;
+            margin-bottom: 10;
         }
 
-        nav ul {
+        nav ul, .form-container, .assets {
             list-style: none;
             padding: 0;
             margin: 0;
@@ -37,11 +35,11 @@
             justify-content: center;
         }
 
-        nav ul li {
+        nav ul li, .form-box, .item {
             margin: 0 10px;
         }
 
-        nav ul li a {
+        nav ul li a, input, .bottom-nav ul li a {
             color: black;
             text-decoration: none;
         }
@@ -50,13 +48,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .form-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 10px;
         }
 
         .form-box {
@@ -77,56 +68,22 @@
             margin-bottom: 10px;
         }
 
-        .assets {
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .item {
-            text-align: center;
-            margin: 10px;
-        }
-
         .item img {
             max-width: 100%;
             height: auto;
         }
 
-        footer {
-            text-align: center;
+        footer, .bottom-nav {
             background-color: rgb(97, 97, 33);
             padding: 10px;
             color: black;
+            text-align: center;
         }
 
-        /* Updated styles for the bottom navigation */
         .bottom-nav {
-            background-color: rgb(97, 97, 33);
-            color: black;
-            text-align: center;
-            padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
-        }
-
-        .bottom-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .bottom-nav ul li {
-            margin: 0 10px;
-        }
-
-        .bottom-nav ul li a {
-            color: black;
-            text-decoration: none;
         }
     </style>
 </head>
@@ -144,26 +101,61 @@
         </nav>
 
         <h2>Digital Asset Library</h2>
+        <div class="form-container">
+            <!-- Your existing search form here -->
+        </div>
+
+        <section id="assetDisplay">
+            <!-- Asset display section -->
+            <!-- You can dynamically generate these items from the database in the future -->
+            <div class="asset-item">
+                <img src="C:\Users\codys\AWS\VoltronTest\VoltronPro3\AI-Image.png">
+                <p>Description of image 1</p>
+            </div>
+
+            <div class="asset-item">
+                <img src="https://institute.careerguide.com/wp-content/uploads/2020/09/giphy-2.gif">
+                <p>what we're about</p>
+            </div>
+        </section>
+
+        <!-- Asset upload form -->
+        <div id="uploadForm" class="form-box">
+            <h3>Upload New Asset</h3>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file">Choose a file:</label>
+                <input type="file" id="file" name="file" accept="image/*">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </main>
+
+    
+        <h2>Digital Asset Library</h2>
 
         <div class="form-container">
             <div class="form-box">
                 <label for="movieTitle">Movie Title:</label>
                 <input type="text" id="movieTitle" name="movieTitle">
+                <button>Search</button>
             </div>
 
             <div class="form-box">
                 <label for="producerName">Producer Name:</label>
                 <input type="text" id="producerName" name="producerName">
+                <button>Search</button>
             </div>
 
             <div class="form-box">
                 <label for="releaseDate">Release Date:</label>
                 <input type="text" id="releaseDate" name="releaseDate">
+                <button>Search</button>
             </div>
 
             <div class="form-box">
                 <label for="rottenTomatoesRating">Rotten Tomatoes Rating:</label>
                 <input type="text" id="rottenTomatoesRating" name="rottenTomatoesRating">
+            <button>Search</button>
             </div>
         </div>
 
