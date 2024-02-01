@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sample SAM Template for API Gateway and Lambda
+
+Resources:
+  VoltronFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.lambdaHandler
+      Runtime: nodejs14.x
+      Events:
+       GetEvent:
+  Type: Api
+  Properties:
+    Path: /employee
+    Method: get
+    RestApiId:
+      Ref: ServerlessRestApi
+    Cors: true
+    Auth:
+      Authorizer: NONE
+
+PostEvent:
+  Type: Api
+  Properties:
+    Path: /employee
+    Method: post
+    RestApiId:
+      Ref: ServerlessRestApi
+    Cors: true
+    Auth:
+      Authorizer: NONE
+        DeleteEvent:
+          Type: Api
+          Properties:
+            Path: /employee/{client}/{asset_name}
+            Method: delete
+
+Outputs:
+  ApiGatewayInvokeURL:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/employee"
+Events:
+  GetEvent:
+    Type: Api
+    Properties:
+      Path: /employee
+      Method: get
+      RestApiId:
+        Ref: ApiGateway
+      Auth:
+        Authorizer: NONE
+      Cors: true
+

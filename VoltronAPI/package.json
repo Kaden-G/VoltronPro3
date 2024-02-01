@@ -1,0 +1,26 @@
+{
+  "name": "voltron-app",
+  "version": "1.0.0",
+  "description": "multi-tier architecture",
+  "main": "app.js",
+  "scripts": {
+    "start": "sam local start-api",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1105.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2",
+    "multer": "^1.4.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "sam-cli": "^1.108.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
