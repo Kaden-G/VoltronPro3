@@ -7,17 +7,29 @@
     <title>Everette Enterprises Digital Asset Library</title>
     <style>
         body {
-            background-color: yellow;
             margin: 0;
             padding: 0;
+            background-image: url('https://i.pinimg.com/originals/af/7b/bd/af7bbdf02998b9ab0b19e3e5389fa67d.jpg');
+            background-size: cover;
+            background-repeat: repeat-y;
+            background-position: center center;
+            height: 100vh; /* Make the background cover the entire viewport height */
         }
+        
+/* 
+        body {
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+        } */
 
-        header, h1 {
-            background: url('C:/Users/codys/AWS/VoltronTest/VoltronPro3/website banner.jpg') center/cover no-repeat;
+        header,
+        h1 {
+            background: url('https://wallpapercave.com/wp/wp3140238.jpg') center/cover no-repeat;
             background-color: rgb(97, 97, 33);
             text-align: center;
             padding: 10px;
-            color: black;
+            color: rgb(254, 2, 2);
         }
 
         h1 {
@@ -27,7 +39,9 @@
             margin-bottom: 10;
         }
 
-        nav ul, .form-container, .assets {
+        nav ul,
+        .form-container,
+        .assets {
             list-style: none;
             padding: 0;
             margin: 0;
@@ -35,11 +49,15 @@
             justify-content: center;
         }
 
-        nav ul li, .form-box, .item {
+        nav ul li,
+        .form-box,
+        .item {
             margin: 0 10px;
         }
 
-        nav ul li a, input, .bottom-nav ul li a {
+        nav ul li a,
+        input,
+        .bottom-nav ul li a {
             color: black;
             text-decoration: none;
         }
@@ -73,17 +91,70 @@
             height: auto;
         }
 
-        footer, .bottom-nav {
-            background-color: rgb(97, 97, 33);
-            padding: 10px;
+        footer,
+        .bottom-nav {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
             color: black;
             text-align: center;
         }
 
         .bottom-nav {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            text-align: center;
+            padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Set display to flex */
+            justify-content: center;
+        }
+
+        .bottom-nav ul li {
+            margin: 0 10px;
+        }
+
+        .bottom-nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        #assetDisplay {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .asset-item {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .asset-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #uploadForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .submission-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -103,18 +174,40 @@
         <h2>Digital Asset Library</h2>
         <div class="form-container">
             <!-- Your existing search form here -->
+            <div class="form-box">
+                <label for="searchQuery">Query Database:</label>
+                <input type="text" id="searchQuery" name="searchQuery">
+                <button onclick="searchAssets()">Search</button>
+            </div>
+        </div>
+
+        <!-- Submission Box -->
+        <div class="submission-box form-box">
+            <h3>Submit New Asset</h3>
+            <form action="/submit" method="post">
+                <label for="clientUsername">Client/Username:</label>
+                <input type="text" id="clientUsername" name="clientUsername" required>
+
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+
+                <label for="mediaType">Media Type:</label>
+                <input type="text" id="mediaType" name="mediaType">
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
 
         <section id="assetDisplay">
             <!-- Asset display section -->
             <!-- You can dynamically generate these items from the database in the future -->
             <div class="asset-item">
-                <img src="C:\Users\codys\AWS\VoltronTest\VoltronPro3\AI-Image.png">
+                <img src="https://imgs.search.brave.com/Ue0ZNpkRrEok7M79vrlP46Ue0hyKEyZiJVz6ctjt0Ys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI2/MzkzMDI0NC92ZWN0/b3IvZnVuLWNvbG9y/ZnVsLWFic3RyYWN0/LWJhY2tncm91bmQt/aWxsdXN0cmF0aW9u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1XNFJyV1o1T256/MWt3UVVGTmprSEFR/TmJCYTJ0VGJDSjVy/VmZBREhVb0p3PQ">
                 <p>Description of image 1</p>
             </div>
 
             <div class="asset-item">
-                <img src="https://institute.careerguide.com/wp-content/uploads/2020/09/giphy-2.gif">
+                <img src="https://voltronproj3bucket.s3.amazonaws.com/website+gif.gif">
                 <p>what we're about</p>
             </div>
         </section>
@@ -130,52 +223,6 @@
         </div>
     </main>
 
-    
-        <h2>Digital Asset Library</h2>
-
-        <div class="form-container">
-            <div class="form-box">
-                <label for="movieTitle">Movie Title:</label>
-                <input type="text" id="movieTitle" name="movieTitle">
-                <button>Search</button>
-            </div>
-
-            <div class="form-box">
-                <label for="producerName">Producer Name:</label>
-                <input type="text" id="producerName" name="producerName">
-                <button>Search</button>
-            </div>
-
-            <div class="form-box">
-                <label for="releaseDate">Release Date:</label>
-                <input type="text" id="releaseDate" name="releaseDate">
-                <button>Search</button>
-            </div>
-
-            <div class="form-box">
-                <label for="rottenTomatoesRating">Rotten Tomatoes Rating:</label>
-                <input type="text" id="rottenTomatoesRating" name="rottenTomatoesRating">
-            <button>Search</button>
-            </div>
-        </div>
-
-        <section class="assets">
-
-            <h3>What we're about</h3>
-
-            <div class="item">
-                <img src="C:\Users\codys\AWS\VoltronTest\VoltronPro3\AI-Image.png">
-                <p>Description of image 1</p>
-            </div>
-
-            <div class="item">
-                <img src="https://institute.careerguide.com/wp-content/uploads/2020/09/giphy-2.gif">
-                <p>what we're about</p>
-            </div>
-
-        </section>
-    </main>
-
     <footer>
         <p>&copy; 2023 Everette Enterprises</p>
     </footer>
@@ -188,6 +235,36 @@
             <li><a href="#">Library</a></li>
         </ul>
     </div>
+
+    <!-- Include the AWS Amplify library -->
+    <script src="https://cdn.ampproject.org/rtv/0101212004501/v0/amp-analytics-0.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-amplify/4.3.8/amplify.min.js"></script>
+
+    <!-- Add your AWS configuration -->
+    <script>
+        amplify.configure({
+            Auth: {
+                identityPoolId: 'YOUR_IDENTITY_POOL_ID',
+                region: 'YOUR_AWS_REGION'
+            },
+            Storage: {
+                AWSS3: {
+                    bucket: 'YOUR_S3_BUCKET_NAME',
+                    region: 'YOUR_AWS_REGION'
+                }
+            }
+        });
+    </script>
+
+    <!-- Add the searchAssets function for the search button -->
+    <script>
+        function searchAssets() {
+            // Implement your S3 bucket search logic here using Amplify
+            // For example: amplify.Storage.list('path/to/search').then(result => console.log(result));
+        }
+    </script>
 </body>
+
+</html>
 
 </html>
