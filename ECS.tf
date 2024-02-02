@@ -62,7 +62,18 @@ resource "aws_ecs_service" "my_service" {
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets         = ["subnet-0057664ba21bd4735"]  # Replace with your subnet IDs
+    subnets         = ["subnet-036fec3f008607b52"]  # Replace with your subnet IDs
     security_groups = ["sg-0d1ccb3f21d0b03d9"]      # Replace with your security group IDs
+  }
+}
+
+# EC2 Instance
+resource "aws_instance" "my_instance" {
+  provider = aws.main  # Specify the provider alias
+  ami           = "ami-12345678"
+  instance_type = "t3.micro"
+  
+  tags = {
+    Name = "Voltron_ECS_Instance"  # Set the name tag for your EC2 instance
   }
 }
