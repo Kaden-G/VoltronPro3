@@ -184,19 +184,52 @@
         <!-- Submission Box -->
         <div class="submission-box form-box">
             <h3>Submit New Asset</h3>
-            <form action="/submit" method="post">
+            <form id="submissionForm">
                 <label for="clientUsername">Client/Username:</label>
                 <input type="text" id="clientUsername" name="clientUsername" required>
-
+    
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title">
-
+    
                 <label for="mediaType">Media Type:</label>
                 <input type="text" id="mediaType" name="mediaType">
-
-                <button type="submit">Submit</button>
+    
+                <button type="button" onclick="submitForm()">Submit</button>
             </form>
         </div>
+    
+        <!-- Add the submitForm function -->
+        <script>
+        function submitForm() {
+            const clientUsername = document.getElementById("clientUsername").value;
+            const title = document.getElementById("title").value;
+            const mediaType = document.getElementById("mediaType").value;
+
+            const formData = {
+                clientUsername: clientUsername,
+                title: title,
+                mediaType: mediaType
+            };
+
+            fetch('YourApiGatewayEndpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error as needed
+            });
+        }
+        </script>
+        </script>
 
         <section id="assetDisplay">
             <!-- Asset display section -->
@@ -264,7 +297,5 @@
         }
     </script>
 </body>
-
-</html>
 
 </html>
