@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everette Enterprises Digital Asset Library</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/originals/af/7b/bd/af7bbdf02998b9ab0b19e3e5389fa67d.jpg');
+            background-size: cover;
+            background-repeat: repeat-y;
+            background-position: center center;
+            height: 100vh; /* Make the background cover the entire viewport height */
+        }
+        
+/* 
+        body {
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+        } */
+
+        header,
+        h1 {
+            background: url('https://wallpapercave.com/wp/wp3140238.jpg') center/cover no-repeat;
+            background-color: rgb(97, 97, 33);
+            text-align: center;
+            padding: 10px;
+            color: rgb(254, 2, 2);
+        }
+
+        h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 36pt;
+            padding: 20px 650px;
+            margin-bottom: 10;
+        }
+
+        nav ul,
+        .form-container,
+        .assets {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li,
+        .form-box,
+        .item {
+            margin: 0 10px;
+        }
+
+        nav ul li a,
+        input,
+        .bottom-nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-box {
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        footer,
+        .bottom-nav {
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            color: black;
+            text-align: center;
+        }
+
+        .bottom-nav {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Set display to flex */
+            justify-content: center;
+        }
+
+        .bottom-nav ul li {
+            margin: 0 10px;
+        }
+
+        .bottom-nav ul li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        #assetDisplay {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .asset-item {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .asset-item img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #uploadForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .submission-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+</head><!-- Head content remains unchanged -->
+</head>
+<body>
+    <main>
+        <h1>Everette Enterprises</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Library</a></li>
+            </ul>
+        </nav>
+
+        <h2>Digital Asset Library</h2>
+        <div class="form-container">
+            <!-- Your existing search form here -->
+            <div class="form-box">
+                <label for="searchQuery">Query Database:</label>
+                <input type="text" id="searchQuery" name="searchQuery">
+                <button onclick="searchAssets()">Search</button>
+            </div>
+        </div>
+
+        <!-- Submission Box -->
+        <div class="submission-box form-box">
+            <h3>Submit New Asset</h3>
+            <form id="submissionForm">
+                <label for="clientUsername">Client/Username:</label>
+                <input type="text" id="clientUsername" name="clientUsername" required>
+    
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+    
+                <label for="mediaType">Media Type:</label>
+                <input type="text" id="mediaType" name="mediaType">
+    
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+        </div> <!-- Main content up to the script tag remains unchanged -->
+
+        <!-- Updated JavaScript with API Gateway integration -->
+        <script>
+        // Define the base URL for your API Gateway endpoint
+        const API_BASE_URL = 'https://your-api-id.execute-api.your-region.amazonaws.com/yourStage';
+
+        function submitForm() {
+            const clientUsername = document.getElementById("clientUsername").value;
+            const title = document.getElementById("title").value;
+            const mediaType = document.getElementById("mediaType").value;
+
+            const formData = {
+                clientUsername: clientUsername,
+                title: title,
+                mediaType: mediaType
+            };
+
+            // Use the API Gateway URL for the fetch call
+            fetch(`${API_BASE_URL}/submit_asset`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Asset submitted successfully');
+                // Optionally, refresh the asset list
+                fetchAssets();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error submitting asset');
+            });
+        }
+
+        function fetchAssets() {
+            // Use the API Gateway URL for the fetch call
+            fetch(`${API_BASE_URL}/assets`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                const display = document.getElementById('assetDisplay');
+                display.innerHTML = ''; // Clear the display area first
+                data.forEach(asset => {
+                    const assetDiv = document.createElement('div');
+                    assetDiv.innerHTML = `<p>${asset.title} - ${asset.mediaType}</p><button onclick="deleteAsset('${asset.assetId}')">Delete</button>`;
+                    display.appendChild(assetDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function deleteAsset(assetId) {
+            // Use the API Gateway URL for the fetch call
+            fetch(`${API_BASE_URL}/assets/${assetId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Delete Successful:', data);
+                alert('Asset deleted successfully');
+                // Refresh the asset list to reflect the deletion
+                fetchAssets();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error deleting asset');
+            });
+        }
+        </script>
+    </main>
+
+    <!-- Footer and other content remains unchanged -->
+</body>
+</html>
