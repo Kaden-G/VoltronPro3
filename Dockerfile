@@ -1,20 +1,20 @@
-FROM python:3.9.12-buster
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
 
-# Set Flask environment variables
-ENV FLASK_ENV='development'
-ENV FLASK_APP='app.py'
-
-# Set working directory
+# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy files into the working directory
+# Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
-# Install dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# Run the Flask application
+# Define environment variable
+ENV NAME Voltron
+
+# Run app.py when the container launches
 CMD ["python", "app.py"]
