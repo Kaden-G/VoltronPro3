@@ -3,186 +3,226 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Everette Enterprises Digital Asset Library</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url('https://i.pinimg.com/originals/af/7b/bd/af7bbdf02998b9ab0b19e3e5389fa67d.jpg');
-            background-size: cover;
-            background-repeat: repeat-y;
-            background-position: center center;
-            height: 100vh; /* Make the background cover the entire viewport height */
-        }
-        
-/* 
-        body {
-            background-color: rgb(255, 255, 255);
-            margin: 0;
-            padding: 0;
-        } */
-
-        header,
-        h1 {
-            background: url('https://wallpapercave.com/wp/wp3140238.jpg') center/cover no-repeat;
-            background-color: rgb(97, 97, 33);
-            text-align: center;
-            padding: 10px;
-            color: rgb(254, 2, 2);
-        }
-
-        h1 {
-            font-family: 'Brush Script MT', cursive;
-            font-size: 36pt;
-            padding: 20px 650px;
-            margin-bottom: 10;
-        }
-
-        nav ul,
-        .form-container,
-        .assets {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li,
-        .form-box,
-        .item {
-            margin: 0 10px;
-        }
-
-        nav ul li a,
-        input,
-        .bottom-nav ul li a {
-            color: black;
-            text-decoration: none;
-        }
-
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-box {
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 8px;
-            margin: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        .item img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        footer,
-        .bottom-nav {
-            background-color: rgb(255, 255, 255);
-            padding: 20px;
-            color: black;
-            text-align: center;
-        }
-
-        .bottom-nav {
-            background-color: rgb(255, 255, 255);
-            color: black;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .bottom-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex; /* Set display to flex */
-            justify-content: center;
-        }
-
-        .bottom-nav ul li {
-            margin: 0 10px;
-        }
-
-        .bottom-nav ul li a {
-            color: black;
-            text-decoration: none;
-        }
-
-        #assetDisplay {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .asset-item {
-            text-align: center;
-            margin: 10px;
-        }
-
-        .asset-item img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        #uploadForm {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .submission-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Everette Enterprise</title>
 </head>
 
+<style>
+    .white-text {
+        color: white;
+        font-size: 20pt;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    /* body {
+        margin: 0;
+        padding: 0;
+        background-image: url('https://i.pinimg.com/originals/af/7b/bd/af7bbdf02998b9ab0b19e3e5389fa67d.jpg');
+        background-size: cover;
+        background-repeat: repeat-x;
+        background-position: center center;
+        height: 100vh;
+    } */
+
+    nav {
+        background: url('https://wallpapercave.com/wp/wp3140238.jpg') center/cover no-repeat;
+        text-align: center;
+        padding: 10px;
+        color: black; /* Change the text color to white */
+        font-family: 'arial', cursive;
+        font-size: 36pt;
+        padding: 20px 650px;
+        margin-bottom: 10;
+    }
+
+    /* nav ul li a,
+    input,
+    .bottom-nav ul li a {
+        color: black;
+        text-decoration: none;
+    } */
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-box {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 8px;
+        margin: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .item img,
+    .asset-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #assetDisplay {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .asset-item {
+        text-align: center;
+        margin: 10px;
+    }
+    .fluid-box .submission-box {
+        flex-basis: 48%; /* Adjust the width of the boxes as needed */
+        margin-right: 2%;
+    }
+
+    .fluid-box .search-box {
+        flex-basis: 48%; /* Adjust the width of the boxes as needed */
+        margin-left: 2%;
+    }
+
+    .fluid-box .separator {
+        width: 2%;
+        background-color: grey;
+    }
+    #uploadForm,
+    .submission-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-weight: bold;
+    /* background: url('https://i.pinimg.com/originals/af/7b/bd/af7bbdf02998b9ab0b19e3e5389fa67d.jpg') center/cover no-repeat; Set the background */
+}
+    .bottom-nav {
+        background-color: rgb(255, 255, 255);
+        color: black;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+        margin: auto; /* Center the navigation bar */
+    }
+
+    .bottom-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bottom-nav ul li {
+        margin: 0 10px;
+    }
+
+    .bottom-nav ul li a {
+        color: black;
+        text-decoration: none;
+    }
+        /* Center the Copyright information */
+        .footer-text {
+        text-align: center;
+        }
+</style>
 <body>
-
-    <main>
-        <h1>Everette Enterprises</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Library</a></li>
-            </ul>
-        </nav>
-
-        <h2>Digital Asset Library</h2>
-        <div class="form-container">
-            <!-- Your existing search form here -->
-            <div class="form-box">
-                <label for="searchQuery">Query Database:</label>
-                <input type="text" id="searchQuery" name="searchQuery">
-                <button onclick="searchAssets()">Search</button>
-            </div>
+<nav class="container-fluid white-text">
+        <ul>
+            <li class="dropdown">
+                <strong class="white-text">Everette Enterprises</strong>
+            </li>
+        </ul>
+        <ul>
+            <li class="dropdown">
+                <a href="#" class="white-text">About</a>
+                <div class="dropdown-content">
+                    <a href="#">Submenu item 1</a>
+                    <a href="#">Submenu item 2</a>
+                    <!-- Add more submenu items as needed -->
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="white-text">Mission</a>
+                <div class="dropdown-content">
+                    <a href="#">Submenu item 1</a>
+                    <a href="#">Submenu item 2</a>
+                    <!-- Add more submenu items as needed -->
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" role="button" class="white-text">Digital Assets</a>
+                <div class="dropdown-content">
+                    <a href="#">Submenu item 1</a>
+                    <a href="#">Submenu item 2</a>
+                    <!-- Add more submenu items as needed -->
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="grid">
+            <section id="about">
+                <hgroup>
+                    <h2>About Us</h2>
+                    <h3>Everette Enterprise - Your Marketing Partner</h3>
+                </hgroup>
+                <p>Everette Enterprise specializes in creating impactful marketing strategies and campaigns tailored to each client's unique needs. Our innovative approach and experienced team ensure your brand stands out in a crowded marketplace.</p>
+                <figure>
+                    <img src="https://imgs.search.brave.com/Ue0ZNpkRrEok7M79vrlP46Ue0hyKEyZiJVz6ctjt0Ys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI2/MzkzMDI0NC92ZWN0/b3IvZnVuLWNvbG9y/ZnVsLWFic3RyYWN0/LWJhY2tncm91bmQt/aWxsdXN0cmF0aW9u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1XNFJyV1o1T256/MWt3UVVGTmprSEFR/TmJCYTJ0VGJDSjVy/VmZBREhVb0p3PQ" alt="Potential Ads" />
+                    <figcaption>Potential Advertising Strategies</figcaption>
+                </figure>
+            </section>
+            <section id="mission">
+                <hgroup>
+                    <h2>Our Mission</h2>
+                    <h3>Empowering Businesses through Effective Marketing</h3>
+                </hgroup>
+                <p>At Everette Enterprise, our mission is to empower businesses by providing top-notch marketing solutions. We believe in building strong relationships with our clients and delivering results that exceed expectations.</p>
+                <figure>
+                    <img src="https://imgs.search.brave.com/xf3_tI-fxDSSaVY9rYul7KuAiWxm2Y6CTHmgZhN9fZM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Zm91bmRteXNlbGYu/Y29tL2Jsb2cvd3At/Y29udGVudC91cGxv/YWRzL2ZtYmxvZy9z/dXJyZWFsLWFydC0x/LTU2MHg0MjAuanBn" alt="Web Developer and Client" />
+                    <figcaption>Collaboration for Success</figcaption>
+                </figure>
+            </section>
+            <section id="digital-assets">
+                <hgroup>
+                    <h2>Digital Asset Library</h2>
+                    <h3>Access Your Marketing Materials</h3>
+                </hgroup>
+                <p>Our Digital Asset Library provides clients with easy access to all their marketing materials. Stay organized and efficient with our user-friendly digital solutions.</p>
+            </section>
         </div>
-
-        <!-- Submission Box -->
-        <div class="submission-box form-box">
+        <div class="submission-box fluid-box">
             <h3>Submit New Asset</h3>
             <form id="submissionForm">
                 <label for="clientUsername">Client/Username:</label>
@@ -197,105 +237,28 @@
                 <button type="button" onclick="submitForm()">Submit</button>
             </form>
         </div>
-    
-        <!-- Add the submitForm function -->
-        <script>
-        function submitForm() {
-            const clientUsername = document.getElementById("clientUsername").value;
-            const title = document.getElementById("title").value;
-            const mediaType = document.getElementById("mediaType").value;
-
-            const formData = {
-                clientUsername: clientUsername,
-                title: title,
-                mediaType: mediaType
-            };
-
-            fetch('YourApiGatewayEndpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success response as needed
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error as needed
-            });
-        }
-        </script>
-        </script>
-
-        <section id="assetDisplay">
-            <!-- Asset display section -->
-            <!-- You can dynamically generate these items from the database in the future -->
-            <div class="asset-item">
-                <img src="https://imgs.search.brave.com/Ue0ZNpkRrEok7M79vrlP46Ue0hyKEyZiJVz6ctjt0Ys/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI2/MzkzMDI0NC92ZWN0/b3IvZnVuLWNvbG9y/ZnVsLWFic3RyYWN0/LWJhY2tncm91bmQt/aWxsdXN0cmF0aW9u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1XNFJyV1o1T256/MWt3UVVGTmprSEFR/TmJCYTJ0VGJDSjVy/VmZBREhVb0p3PQ">
-                <p>Description of image 1</p>
+        <div class="container-fluid text-center">
+            <!-- Your existing search form here -->
+            <div class="container-fluid" style="font-weight: bold;>
+                <label for="searchQuery">Query Database:</label>
+                <input type="text" id="searchQuery" name="searchQuery">
+                <form id="submissionForm">
+                    <label for="clientUsername">Client/Username:</label>
+                    <input type="text" id="clientUsername" name="clientUsername" required>
+        
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title">
+        
+                    <label for="mediaType">Media Type:</label>
+                    <input type="text" id="mediaType" name="mediaType">
+                    <button onclick="searchAssets()">Search</button>
             </div>
-
-            <div class="asset-item">
-                <img src="https://voltronproj3bucket.s3.amazonaws.com/website+gif.gif">
-                <p>what we're about</p>
-            </div>
-        </section>
-
-        <!-- Asset upload form -->
-        <div id="uploadForm" class="form-box">
-            <h3>Upload New Asset</h3>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <label for="file">Choose a file:</label>
-                <input type="file" id="file" name="file" accept="image/*">
-                <button type="submit">Upload</button>
-            </form>
         </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Everette Enterprises</p>
+    <footer class="container-fluid text-center" style="text-align: center;">
+        <p>Copyright &copy; Everette Enterprises 2021</p>
+        <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Use</a></small>
     </footer>
-
-    <!-- New bottom navigation -->
-    <div class="bottom-nav">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Library</a></li>
-        </ul>
-    </div>
-
-    <!-- Include the AWS Amplify library -->
-    <script src="https://cdn.ampproject.org/rtv/0101212004501/v0/amp-analytics-0.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-amplify/4.3.8/amplify.min.js"></script>
-
-    <!-- Add your AWS configuration -->
-    <script>
-        amplify.configure({
-            Auth: {
-                identityPoolId: 'YOUR_IDENTITY_POOL_ID',
-                region: 'YOUR_AWS_REGION'
-            },
-            Storage: {
-                AWSS3: {
-                    bucket: 'YOUR_S3_BUCKET_NAME',
-                    region: 'YOUR_AWS_REGION'
-                }
-            }
-        });
-    </script>
-
-    <!-- Add the searchAssets function for the search button -->
-    <script>
-        function searchAssets() {
-            // Implement your S3 bucket search logic here using Amplify
-            // For example: amplify.Storage.list('path/to/search').then(result => console.log(result));
-        }
-    </script>
 </body>
+</html>
 
 </html>
