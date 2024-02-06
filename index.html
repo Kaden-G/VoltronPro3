@@ -199,7 +199,7 @@
         <!-- Updated JavaScript with API Gateway integration -->
         <script>
         // Define the base URL for your API Gateway endpoint
-        const API_BASE_URL = 'https://your-api-id.execute-api.your-region.amazonaws.com/yourStage';
+        const API_BASE_URL = 'https://x3ujj2eooi.execute-api.us-east-1.amazonaws.com/dl-test3';
 
         function submitForm() {
             const clientUsername = document.getElementById("clientUsername").value;
@@ -214,34 +214,42 @@
 
             // Use the API Gateway URL for the fetch call
             fetch(`${API_BASE_URL}/submit_asset`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                alert('Asset submitted successfully');
-                // Optionally, refresh the asset list
-                fetchAssets();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting asset');
-            });
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    if (!response.headers.get('Content-Type').includes('application/json')) {
+        throw new Error('Expected JSON response');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Success:', data);
+    alert('Asset submitted successfully');
+    fetchAssets();
+})
+.catch(error => {
+    console.error('Error:', error);
+    alert('Error submitting asset');
+});
+
         }
 
         function fetchAssets() {
             // Use the API Gateway URL for the fetch call
-            fetch(`${API_BASE_URL}/assets`, {
+            fetch(`${API_BASE_URL}/assets`, { // Error missing cred
                 method: 'GET'
             })
             .then(response => response.json())
             .then(data => {
                 const display = document.getElementById('assetDisplay');
-                display.innerHTML = ''; // Clear the display area first
+                display.innerHTML = ''; // Clear the display area first <------ Having Error
                 data.forEach(asset => {
                     const assetDiv = document.createElement('div');
                     assetDiv.innerHTML = `<p>${asset.title} - ${asset.mediaType}</p><button onclick="deleteAsset('${asset.assetId}')">Delete</button>`;
