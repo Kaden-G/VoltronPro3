@@ -240,26 +240,34 @@
 });
 
         }
-
-        function fetchAssets() {
-            // Use the API Gateway URL for the fetch call
-            fetch(`${API_BASE_URL}/assets`, { // Error missing cred
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(data => {
-                const display = document.getElementById('assetDisplay');
-                display.innerHTML = ''; // Clear the display area first <------ Having Error
-                data.forEach(asset => {
-                    const assetDiv = document.createElement('div');
-                    assetDiv.innerHTML = `<p>${asset.title} - ${asset.mediaType}</p><button onclick="deleteAsset('${asset.assetId}')">Delete</button>`;
-                    display.appendChild(assetDiv);
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+function fetchAssets() {
+    // Use the API Gateway URL for the fetch call to get all assets
+    fetch(`${API_BASE_URL}/assets`, { // Adjusted to target the endpoint for all assets
+        method: 'GET',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        return response.json();
+    })
+    .then(data => {
+        const display = document.getElementById('assetDisplay');
+        display.innerHTML = ''; // Clear the display area first
+
+        // Assuming `data` is an array of assets. Adjust based on actual API response structure
+        data.forEach(asset => {
+            const assetDiv = document.createElement('div');
+            assetDiv.className = 'asset-item'; // Use the class for styling if needed
+            // Include clientUsername in the displayed information
+            assetDiv.innerHTML = `<p>${asset.clientUsername}: ${asset.title} - ${asset.mediaType}</p>`;
+            display.appendChild(assetDiv);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
         function deleteAsset(assetId) {
             // Use the API Gateway URL for the fetch call
