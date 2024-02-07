@@ -7,16 +7,16 @@ resource "aws_dynamodb_table" "Voltron" {
   billing_mode   = "PROVISIONED"  # Or "PAY_PER_REQUEST"
   read_capacity  = 5  # Only if using PROVISIONED billing mode
   write_capacity = 5  # Only if using PROVISIONED billing mode
-  hash_key       = "Client"
-  range_key      = "Asset_name"
+  hash_key       = "clientUsername"
+  range_key      = "title"
 
   attribute {
-    name = "Client"
+    name = "clientUsername"
     type = "S"  # String type
   }
 
   attribute {
-    name = "Asset_name"
+    name = "title"
     type = "S"
   }
 
