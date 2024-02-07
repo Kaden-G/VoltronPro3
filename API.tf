@@ -25,6 +25,37 @@ resource "aws_api_gateway_method" "get_method" {
   authorization = "NONE"
 }
 
+# Create HTTP OPTION Method
+resource "aws_api_gateway_method" "option_method" {
+  rest_api_id   = aws_api_gateway_rest_api.voltron_api.id
+  resource_id   = aws_api_gateway_resource.voltron_resource.id
+  http_method   = "OPTION"
+  authorization = "NONE"
+}
+  # Create HTTP GET Method
+  resource "aws_api_gateway_method" "get_method" {
+    rest_api_id   = aws_api_gateway_rest_api.voltron_api.id
+    resource_id   = aws_api_gateway_resource.voltron_resource.id
+    http_method   = "GET"
+    authorization = "NONE"
+  }
+
+  # Create HTTP OPTION Method
+  resource "aws_api_gateway_method" "option_method" {
+    rest_api_id   = aws_api_gateway_rest_api.voltron_api.id
+    resource_id   = aws_api_gateway_resource.voltron_resource.id
+    http_method   = "OPTION"
+    authorization = "NONE"
+  }
+
+# Create HTTP OPTION Method
+resource "aws_api_gateway_method" "option_method" {
+  rest_api_id   = aws_api_gateway_rest_api.voltron_api.id
+  resource_id   = aws_api_gateway_resource.voltron_resource.id
+  http_method   = "OPTION"
+  authorization = "NONE"
+}
+
 # Create HTTP POST Method
 resource "aws_api_gateway_method" "post_method" {
   rest_api_id   = aws_api_gateway_rest_api.voltron_api.id
@@ -51,6 +82,16 @@ resource "aws_api_gateway_integration" "post_integration" {
   integration_http_method = "POST"
   type                    = "HTTP_PROXY"
   uri                     = "http://example.com/post-endpoint"  # Replace with your actual POST endpoint
+}
+
+# Create Integration (HTTP Proxy) for OPTION
+resource "aws_api_gateway_integration" "option_integration" {
+  rest_api_id             = aws_api_gateway_rest_api.voltron_api.id
+  resource_id             = aws_api_gateway_resource.voltron_resource.id
+  http_method             = aws_api_gateway_method.option_method.http_method
+  integration_http_method = "OPTION"
+  type                    = "HTTP_PROXY"
+  uri                     = "http://example.com/option-endpoint"  # Replace with your actual OPTION endpoint
 }
 
 # Deploy the API
