@@ -292,9 +292,24 @@ function displaySearchResults(results) {
     const resultsDiv = document.getElementById('searchResults');
     resultsDiv.innerHTML = ''; // Clear previous results
 
-    results.forEach(result => {
+    // Assuming 'results' is an array; if it's a single object, adjust accordingly
+    [results].flat().forEach(result => {
         const div = document.createElement('div');
-        div.textContent = `Client/Username: ${result.clientUsername}, Title: ${result.title}, Media Type: ${result.mediaType}`;
+        
+        // Directly use the 'mediaType' field as the image URL
+        const img = document.createElement('img');
+        img.src = result.mediaType; // This is the image URL in your case
+        img.alt = `Image for ${result.clientUsername}`;
+        img.style.maxWidth = '100%'; // Responsive image width
+        img.style.height = 'auto';
+        
+        div.appendChild(img);
+
+        // Add title and clientUsername as text below the image
+        const text = document.createElement('p');
+        text.textContent = `Client/Username: ${result.clientUsername}, Title: ${result.title}`;
+        div.appendChild(text);
+
         resultsDiv.appendChild(div);
     });
 
