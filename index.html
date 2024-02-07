@@ -237,11 +237,13 @@
                 <label for="submissionclientUsername">Client/Username:</label>
                 <input type="text" id="submissionclientUsername" name="submissionclientUsername" required>
     
+                <label for="voucherCode">Voucher Code:</label>
+                <input type="number" id="voucherCode" name="voucherCode">
+
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title">
     
-                <label for="mediaType">Media Type:</label>
-                <input type="text" id="mediaType" name="mediaType">
+
     
                 <button type="button" onclick="submitForm()">Submit</button>
             </form>
@@ -265,6 +267,13 @@
     event.preventDefault(); // Prevent the default form submission behavior
 
     var clientUsername = document.getElementById('searchclientUsername').value.trim();
+    var voucherCode = document.getElementById('voucherCode').value;
+
+    // Check if voucherCode is numeric (this check is somewhat redundant due to type="number" but serves as an extra precaution)
+    if (!voucherCode || isNaN(voucherCode)) {
+        alert('Voucher Code must be a number.');
+        return; // Stop the form submission
+    }
 
     if (clientUsername) {
         var url = `https://x3ujj2eooi.execute-api.us-east-1.amazonaws.com/dl-test3/assets/${encodeURIComponent(clientUsername)}`;
@@ -277,8 +286,8 @@
             return response.json();
         })
         .then(data => {
-            // Here is where you should call displaySearchResults
-            displaySearchResults(data); // This function will handle the display logic
+            // Handle the response data
+            displaySearchResults(data);
         })
         .catch(error => {
             console.error('Search failed:', error);
@@ -294,7 +303,7 @@ function displaySearchResults(results) {
 
     results.forEach(result => {
         const div = document.createElement('div');
-        div.textContent = `Client/Username: ${result.clientUsername}, Title: ${result.title}, Media Type: ${result.mediaType}`;
+        div.textContent = `Client/Username: ${result.clientUsername}, Title: ${result.title}, Voucher Code: ${result.voucherCode}`;
         resultsDiv.appendChild(div);
     });
 
