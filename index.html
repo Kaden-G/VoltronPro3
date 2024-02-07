@@ -60,6 +60,16 @@
         text-decoration: none;
     } */
 
+/* Hide the up and down arrows from a number input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
     main {
         display: flex;
         flex-direction: column;
