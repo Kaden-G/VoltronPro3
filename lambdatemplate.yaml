@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: DynamoDB-backed Lambda function
+
+Resources:
+  SubmitAssetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.handler
+      Runtime: nodejs14.x
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: 'Voltron'
+
+Outputs:
+  SubmitAssetFunction:
+    Description: 'Lambda Function to submit assets'
+    Value: !GetAtt SubmitAssetFunction.Arn

@@ -238,22 +238,151 @@
             </form>
         </div>
         <div class="container-fluid text-center">
-            <!-- Your existing search form here -->
-            <div class="container-fluid" style="font-weight: bold;>
-                <label for="searchQuery">Query Database:</label>
-                <input type="text" id="searchQuery" name="searchQuery">
-                <form id="submissionForm">
-                    <label for="clientUsername">Client/Username:</label>
-                    <input type="text" id="clientUsername" name="clientUsername" required>
-        
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title">
-        
-                    <label for="mediaType">Media Type:</label>
-                    <input type="text" id="mediaType" name="mediaType">
-                    <button onclick="searchAssets()">Search</button>
-            </div>
+            <!-- Updated Search Form -->
+            <form id="searchForm">
+                <label for="clientUsername">Query Database by Client/Username:</label>
+                <input type="text" id="clientUsername" name="clientUsername" required>
+                <button type="submit">Search</button>
+            </form>
+            <!-- Placeholder for displaying search results -->
+            <div id="searchResults"></div>
         </div>
+
+        <script>
+            // Define the base URL for your API Gateway endpoint
+            const API_BASE_URL = 'https://x3ujj2eooi.execute-api.us-east-1.amazonaws.com/dl-test3';
+        
+            document.getElementById('searchForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+        
+                // Get the value from the clientUsername input field
+                var clientUsername = document.getElementById('clientUsername').value.trim();
+        
+                if (clientUsername) {
+                    // Construct the URL for the GET request
+                    var url = `${API_BASE_URL}/asset/${encodeURIComponent(clientUsername)}`;
+        
+                    // Send the GET request to the server
+                    fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error: ${response.statusText}`);
+                        }
+                        return response.json(); // Assuming the server responds with JSON
+                    })
+                    .then(data => {
+                        // Process and display the search results
+                        displaySearchResults(data); // Implement this function based on how you want to display your results
+                    })
+                    .catch(error => {
+                        console.error('Search failed:', error);
+                        // Optionally update the UI to indicate the error
+                    });
+                } else {
+                    console.log('Client/Username is required for search.');
+                    // Optionally alert the user or handle empty input gracefully
+                }
+            });
+        
+            function displaySearchResults(results) {
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = ''; // Clear previous results
+        
+                // Assuming results is an array of objects
+                results.forEach(result => {
+                    const div = document.createElement('div');
+                    // Customize this based on the structure of your results
+                    div.textContent = `Client/Username: ${result.clientUsername}, Title: ${result.title}, Media Type: ${result.mediaType}`;
+                    resultsDiv.appendChild(div);
+                });
+        
+                if (results.length === 0) {
+                    resultsDiv.textContent = 'No results found.';
+                }
+            }
+        
+            function submitForm() {
+                const clientUsername = document.getElementById("clientUsername").value;
+                const title = document.getElementById("title").value;
+                const mediaType = document.getElementById("mediaType").value;
+        
+                const formData = {
+                    clientUsername: clientUsername,
+                    title: title,
+                    mediaType: mediaType
+                };
+        
+                // Use the API Gateway URL for the fetch call
+                fetch(`${API_BASE_URL}/submit_asset`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Asset submitted successfully');
+                    fetchAssets();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error submitting asset');
+                });
+            }
+        
+            function fetchAssets() {
+                // Use the API Gateway URL for the fetch call to get all assets
+                fetch(`${API_BASE_URL}/assets`, {
+                    method: 'GET',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const display = document.getElementById('assetDisplay');
+                    display.innerHTML = ''; // Clear the display area first
+        
+                    // Assuming `data` is an array of assets. Adjust based on actual API response structure
+                    data.forEach(asset => {
+                        const assetDiv = document.createElement('div');
+                        assetDiv.className = 'asset-item';
+                        assetDiv.innerHTML = `<p>${asset.clientUsername}: ${asset.title} - ${asset.mediaType}</p>`;
+                        display.appendChild(assetDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        
+            function deleteAsset(assetId) {
+                // Use the API Gateway URL for the fetch call
+                fetch(`${API_BASE_URL}/assets/${assetId}`, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Delete Successful:', data);
+                    alert('Asset deleted successfully');
+                    fetchAssets();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error deleting asset');
+                });
+            }
+        </script>
+        
     <footer class="container-fluid text-center" style="text-align: center;">
         <p>Copyright &copy; Everette Enterprises 2021</p>
         <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Use</a></small>
