@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Installing Terraform..."
+      - wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
+      - unzip terraform_1.0.0_linux_amd64.zip
+      - mv terraform $HOME/bin
+      - export PATH=$PATH:$HOME/bin
+      - terraform -v
+
+  pre_build:
+    commands:
+      - cd MVP  # Navigate to the MVP folder
+      - echo "Running Terraform Init..."
+      - terraform init -input=false
+
+  build:
+    commands:
+      - echo "Running Terraform Apply..."
+      - terraform apply -auto-approve -input=false
+
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+
+# Uncomment the following if you are using artifacts
+# artifacts:
+#   files:
+#     - '**/*'
