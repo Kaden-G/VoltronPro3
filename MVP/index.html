@@ -264,7 +264,7 @@
 
         <script>
             // Define the base URL for your API Gateway endpoint
-            const API_BASE_URL = 'https://x3ujj2eooi.execute-api.us-east-1.amazonaws.com/dl-test3';
+            const API_BASE_URL = 'https://myylpt56d3.execute-api.us-east-1.amazonaws.com/Dev';
         
             document.getElementById('searchForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -272,7 +272,7 @@
     var clientUsername = document.getElementById('searchclientUsername').value.trim();
 
     if (clientUsername) {
-        var url = `https://x3ujj2eooi.execute-api.us-east-1.amazonaws.com/dl-test3/assets/${encodeURIComponent(clientUsername)}`;
+        var url = `https://myylpt56d3.execute-api.us-east-1.amazonaws.com/Dev/assets/${encodeURIComponent(clientUsername)}`;
 
         fetch(url)
         .then(response => {
