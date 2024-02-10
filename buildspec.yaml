@@ -1,12 +1,11 @@
 version: 0.2
 
 phases:
-
   pre_build:
     commands:
-      echo Logging into Amazon ECR...
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8b0e9r5/voltron-repo
-      - echo Running tests...
+      - echo "Logging into Amazon ECR..."
+      - $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8b0e9r5/voltron-repo)
+      - echo "Running tests..."
       # Add commands to run your tests here
 
   build:
