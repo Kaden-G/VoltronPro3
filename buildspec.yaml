@@ -12,8 +12,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t voltronapp .
-      - docker tag voltronapp:latest public.ecr.aws/n8b0e9r5/voltron-repo:latest
+      - docker build -t voltronflaskapp.
+      - docker tag voltronflaskapp:latest public.ecr.aws/n8b0e9r5/voltron-repo:latest
 
   post_build:
     commands:
