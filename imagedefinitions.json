@@ -1,0 +1,6 @@
+[
+  {
+      "name": "<NAME OF YOUR CONTAINER>",
+      "imageUri": "public.ecr.aws/n8b0e9r5/voltron-repo:latest"
+  }
+]
