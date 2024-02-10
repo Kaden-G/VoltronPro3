@@ -1,6 +1,6 @@
 [
   {
-      "name": "<NAME OF YOUR CONTAINER>",
+      "name": "alb-container",
       "imageUri": "public.ecr.aws/n8b0e9r5/voltron-repo:latest"
   }
 ]
