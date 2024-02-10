@@ -1,32 +1,26 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - yum update -y
-      - yum install unzip -y
-      - echo "Installing Terraform..."
-      - wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
-      - unzip terraform_1.0.0_linux_amd64.zip
-      - chmod +x terraform
-      - terraform -v
 
   pre_build:
     commands:
-      - cd MVP  # Navigate to the MVP folder
-      - echo "Running Terraform Init..."
-      - terraform init -input=false
+      echo Logging into Amazon ECR...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8b0e9r5/voltron-repo
+      - echo Running tests...
+      # Add commands to run your tests here
 
   build:
     commands:
-      - echo "Running Terraform Apply..."
-      - terraform apply -auto-approve -input=false
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t voltronapp .
+      - docker tag voltronapp:latest public.ecr.aws/n8b0e9r5/voltron-repo:latest
 
   post_build:
     commands:
-      - echo "Build completed on `date`"
-
-# Uncomment the following if you are using artifacts
-# artifacts:
-#   files:
-#     - '**/*'
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push public.ecr.aws/n8b0e9r5/voltron-repo:latest
+      
+artifacts:
+    files: imagedefinitions.json
