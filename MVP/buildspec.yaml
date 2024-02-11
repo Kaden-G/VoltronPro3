@@ -3,23 +3,18 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Logging into Amazon ECR..."
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n8b0e9r5/voltron-repo
-      - echo "Running tests..."
-      # Add commands to run your tests here
-
+      - echo "Starting the build process"
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t voltronapp .
-      - docker tag voltronapp:latest public.ecr.aws/n8b0e9r5/voltron-repo:latest
-
+      - echo "Build phase - nothing to build for HTML"
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push public.ecr.aws/n8b0e9r5/voltron-repo:latest
-      
+      - echo "Post-build phase"
+      - aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
 artifacts:
-    files: imagedefinitions.json
+  files:
+    - index2.html
+  discard-paths: yes
+  base-directory: .
+rename:
+  index2.html: index.html
