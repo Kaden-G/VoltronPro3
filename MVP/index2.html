@@ -1,53 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <style>
-        .container {
-            position: relative;
-            text-align: center;
-            color: white;
-        }
-
-        .centered-quote {
-            font-size: 24px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .giphy-embed {
-            width: 960px; /* Twice the original width */
-            height: 474px; /* Twice the original height */
-            display: block;
-            margin: auto; /* Centering the iframe */
-        }
-    </style>
+    <title>Everette Enterprise</title>
 </head>
+
+<style>
+    .white-text {
+        color: white;
+        font-size: 20pt;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    nav {
+        background: url('https://wallpapercave.com/wp/wp3140238.jpg') center/cover no-repeat;
+        text-align: center;
+        padding: 10px;
+        color: black; /* Change the text color to white */
+        font-family: 'arial', cursive;
+        font-size: 36pt;
+        padding: 20px 650px;
+        margin-bottom: 10;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-box {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 8px;
+        margin: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .item img,
+    .asset-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #searchResults {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    #assetDisplay {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .asset-item {
+        text-align: center;
+        margin: 10px;
+    }
+
+    .fluid-box .submission-box {
+        flex-basis: 48%;
+        margin-right: 2%;
+    }
+
+    .fluid-box .search-box {
+        flex-basis: 48%;
+        margin-left: 2%;
+    }
+
+    .fluid-box .separator {
+        width: 2%;
+        background-color: grey;
+    }
+
+    #uploadForm,
+    .submission-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .bottom-nav {
+        background-color: rgb(255, 255, 255);
+        color: black;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+        margin: auto;
+    }
+
+    .bottom-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bottom-nav ul li {
+        margin: 0 10px;
+    }
+
+    .bottom-nav ul li a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .footer-text {
+        text-align: center;
+    }
+</style>
+
 <body>
-    <nav class="container-fluid">
-        <ul>
-            <li><strong>Team Voltron: Project 3</strong></li>
-        </ul>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#" role="button">Contact</a></li>
-        </ul>
+    <nav class="container-fluid white-text">
+        <!-- Navigation content here -->
     </nav>
+
+    <!-- GIF added below the navigation -->
+    <div class="centered-quote">The Proof is in the Pipeline</div>
+    <iframe src="https://giphy.com/embed/YqR8igkpXdtJKobl6f" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    <p><a href="https://giphy.com/gifs/teamcoco-YqR8igkpXdtJKobl6f">via GIPHY</a></p>
+
     <main class="container">
-        <div class="container">
-            <div class="centered-quote">The Proof is in the Pipeline</div>
-            <iframe src="https://giphy.com/embed/YqR8igkpXdtJKobl6f" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-            <p><a href="https://giphy.com/gifs/teamcoco-YqR8igkpXdtJKobl6f">via GIPHY</a></p>
-        </div>
+        <!-- Main content here -->
     </main>
-    <footer class="container">
-        <small>
-            <a href="#">Privacy Policy</a> • <a href="#">Terms of Use</a>
-        </small>
+
+    <!-- Existing JavaScript code -->
+    <!-- ... -->
+
+    <footer class="container-fluid text-center" style="text-align: center;">
+        <!-- Footer content here -->
     </footer>
 </body>
+
 </html>
