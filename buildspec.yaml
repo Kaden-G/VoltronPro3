@@ -7,7 +7,7 @@ phases:
 
   build:
     commands:
-      - echo "Build steps: Renaming existing index.html and copying index2.html to index.html"
+      - echo "Renaming existing index.html and copying index2.html to index.html"
       - mv index.html index_backup.html  # Renames the original index.html to index_backup.html
       - cp index2.html index.html        # Copies index2.html to index.html
 
