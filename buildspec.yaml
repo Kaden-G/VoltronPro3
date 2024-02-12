@@ -7,17 +7,18 @@ phases:
 
   build:
     commands:
-     - echo "Build steps: Renaming existing index.html and copying index2.html to index.html"
-     - mv index.html index_backup.html  # Renames the original index.html to index_backup.html
-     - cp index2.html index.html        # Copies index2.html to index.html
+      - echo "Build steps: Renaming existing index.html and copying index2.html to index.html"
+      - mv index.html index_backup.html  # Renames the original index.html to index_backup.html
+      - cp index2.html index.html        # Copies index2.html to index.html
 
   post_build:
     commands:
       - echo "Post-build phase"
       - aws cloudfront create-invalidation --distribution-id E2EVJUGUXU83UX --paths "/*"
-      
+
 artifacts:
   files:
     - index.html
   discard-paths: yes
   base-directory: .
+
