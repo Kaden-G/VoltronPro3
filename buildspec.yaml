@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Starting the build process"
+
+  build:
+    commands:
+      - echo "Building HTML files"
+      - cp index2.html index.html
+
+  post_build:
+    commands:
+      - echo "Post-build phase"
+      - aws cloudfront create-invalidation --distribution-id E2EVJUGUXU83UX --paths "/*"
+      
+artifacts:
+  files:
+    - index.html
+  discard-paths: yes
+  base-directory: .
