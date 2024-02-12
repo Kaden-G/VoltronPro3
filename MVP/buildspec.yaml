@@ -4,13 +4,20 @@ phases:
   pre_build:
     commands:
       - echo "Starting the build process"
+  
   build:
     commands:
-      - echo "Build phase - nothing to build for HTML"
+      - echo "Starting the build process"
+      # Add your build commands here
+      - echo "Building HTML files"
+      # Example: Copy index2.html to index.html (specific to your case)
+      - cp index2.html index.html
+
   post_build:
     commands:
       - echo "Post-build phase"
-      - aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+      - aws cloudfront create-invalidation --distribution-id https://dcykjis472sia.cloudfront.net --paths "/*"
+      
 artifacts:
   files:
     - index2.html
